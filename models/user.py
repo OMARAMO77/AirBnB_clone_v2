@@ -5,7 +5,7 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This class Represents a user for a MySQL database.
 
     Inherits from SQLAlchemy Base and links to the MySQL table users.
