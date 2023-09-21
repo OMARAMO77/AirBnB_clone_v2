@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import Column, String, Integer, ForeignKey, Float, Table
+from models.amenity import Amenity, place_amenity
 from sqlalchemy.orm import relationship
 
 
@@ -23,6 +24,9 @@ class Place(BaseModel, Base):
         longitude = Column(Float)
         amenity_ids = []
         reviews = relationship("Review", backref='place', cascade="all, delete")
+        amenities = relationship('Amenity', secondary=place_amenity,
+                                 back_populates='place_amenities',
+                                 viewonly=False)
     else:
         city_id = ''
         user_id = ''
@@ -38,8 +42,7 @@ class Place(BaseModel, Base):
 
         @property
         def reviews(self):
-            """Get a list of all linked Reviews.
-            """
+            """Get a list of all linked Reviews"""
             from models import storage
             reviews_list = []
             for review in storage.all(Review).values():
@@ -47,3 +50,22 @@ class Place(BaseModel, Base):
                     reviews_list.append(review)
 
             return reviews_list
+
+        @property
+        def amenities(self):
+            """Get and Set linked Amenities.
+            """
+            from models import storage
+            amenity_list = []
+            for amenity in storage.all(Amenity).values():
+                if amenity.id in self.amenity_ids:
+                    amenity_list.append(amenity)
+
+            return amenity_list
+
+        @amenities.setter
+        def amenities(self, value):
+            """Adding an Amenity.id to the amenity_ids"""
+
+            if type(value) == Amenity:
+                self.amenity_ids.append(value.id)
