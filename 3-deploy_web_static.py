@@ -3,9 +3,10 @@ from datetime import datetime
 from fabric.api import local, put, run, env
 
 env.user = 'ubuntu'
-env.hosts = ['54.157.153.208', '54.145.155.218']
+env.hosts = ['35.229.93.37', '54.196.213.127']
 
 
+@runs_once
 def do_pack():
     """Generates a .tgz archive from the contents
     of the web_static folder of this repo.
@@ -17,7 +18,6 @@ def do_pack():
     path = './versions/web_static_{}'.format(now)
     local('sudo tar -czvf {}.tgz web_static'.format(path))
     return path
-
 
 def do_deploy(archive_path):
     """Distributes an .tgz archive to my web servers
@@ -43,9 +43,9 @@ def do_deploy(archive_path):
 
 
 def deploy():
+    """Creates and Distributes a .tgz archive through web servers
     """
-    Creates and distributes an archive to my web servers
-    """
+
     archive = do_pack()
     status = do_deploy(archive)
     return status
