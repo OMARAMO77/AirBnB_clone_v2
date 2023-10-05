@@ -22,7 +22,7 @@ def do_deploy(archive_path):
     """
     from os import path
     if path.exists(archive_path):
-        archive = archive_path.split('/')[1]
+        archive = archive_path.split('/')[-1]
         uploaded_tgz = "/tmp/{}".format(archive)
         fold_name = archive.split('.')[0]
         fold_path = "/data/web_static/releases/{}/".format(fold_name)
