@@ -6,7 +6,6 @@ env.user = 'ubuntu'
 env.hosts = ['35.229.93.37', '54.196.213.127']
 
 
-@runs_once
 def do_pack():
     """Generates a .tgz archive from the contents
     of the web_static folder of this repo.
