@@ -46,6 +46,5 @@ def deploy():
     """
 
     arch_path = do_pack()
-    print(arch_path)
     status = do_deploy(arch_path)
     return status
