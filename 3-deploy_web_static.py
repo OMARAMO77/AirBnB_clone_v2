@@ -13,9 +13,9 @@ def do_pack():
     d = datetime.now()
     now = d.strftime('%Y%m%d%H%M%S')
 
-    local('sudo mkdir -p ./versions')
-    path = './versions/web_static_{}'.format(now)
-    local('sudo tar -czvf {}.tgz web_static'.format(path))
+    local('sudo mkdir -p versions')
+    path = 'versions/web_static_{}.tgz'.format(now)
+    local('sudo tar -czvf {} web_static'.format(path))
     return path
 
 def do_deploy(archive_path):
@@ -42,9 +42,10 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """Creates and Distributes a .tgz archive through web servers
+    """Creates and distributes an archive to my web servers
     """
 
-    archive = do_pack()
-    status = do_deploy(archive)
+    arch_path = do_pack()
+    print(arch_path)
+    status = do_deploy(arch_path)
     return status
