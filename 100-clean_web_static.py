@@ -60,11 +60,11 @@ def do_clean(number=0):
     total_files = len(local("ls -t versions", capture=True).split())
     files_to_del = total_files - number
 
-    local("ls -v versions | head -n +{} | xargs -I {{}} rm \
+    local("ls -tv versions | head -n +{} | xargs -I {{}} rm \
     versions/{{}}".format(files_to_del))
 
     with cd("/data/web_static/releases"):
         total_files = len(run("ls -t", quiet=True).split())
         files_to_del = total_files - number
-        run("ls -v | head -n +{} | xargs -I {{}} rm -rf \
+        run("ls -tv | head -n +{} | xargs -I {{}} rm -rf \
         {{}}".format(files_to_del))
