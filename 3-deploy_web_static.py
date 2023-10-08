@@ -47,5 +47,7 @@ def deploy():
     """
 
     arch_path = do_pack()
+    if not exists(arch_path):
+        return False
     status = do_deploy(arch_path)
     return status
