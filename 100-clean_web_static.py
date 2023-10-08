@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from datetime import datetime
 from fabric.api import local, put, run, env
+from fabric.context_managers import cd
 
 env.user = 'ubuntu'
 env.hosts = ['54.157.153.208', '54.145.155.218']
@@ -17,6 +18,7 @@ def do_pack():
     path = 'versions/web_static_{}.tgz'.format(now)
     local('sudo tar -czvf {} web_static'.format(path))
     return path
+
 
 def do_deploy(archive_path):
     """Distributes an .tgz archive to my web servers
