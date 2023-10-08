@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 from datetime import datetime
-from fabric.api import local, put, run, env
-from fabric.context_managers import cd
+from fabric.api import local, put, run, env, cd
 
 env.user = 'ubuntu'
 env.hosts = ['54.157.153.208', '54.145.155.218']
