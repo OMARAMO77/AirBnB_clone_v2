@@ -18,6 +18,7 @@ def do_pack():
     local('sudo tar -czvf {} web_static'.format(path))
     return path
 
+
 def do_deploy(archive_path):
     """Distributes an .tgz archive to my web servers
     """
