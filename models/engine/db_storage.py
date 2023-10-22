@@ -33,7 +33,6 @@ class DBStorage:
         if environment == "test":
             Base.MetaData.drop_all()
 
-
     def all(self, cls=None):
         """Returns a dictionary of objects"""
         my_dict = dict()
